@@ -1,0 +1,40 @@
+﻿@model FitnessClub.Models.Shifts
+@{
+    // ViewBag.Title = "";
+    Layout = "~/Views/Shared/Sitemaster.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Request Shift</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Shift, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Shift, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Shift, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ShiftTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ShiftTime, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ShiftTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="form-group" align="center">
+            <div class="col-md-offset-2 col-md-10">
+                <button class="btn btn-primary">Request</button>
+            </div>
+        </div>
+    </div>
+}

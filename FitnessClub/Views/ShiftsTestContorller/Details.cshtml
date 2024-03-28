@@ -1,0 +1,43 @@
+﻿@model FitnessClub.Models.Shifts
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Sitemaster.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Shifts</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Trainer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trainer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Shift)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Shift)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShiftTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShiftTime)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

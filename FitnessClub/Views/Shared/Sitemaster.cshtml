@@ -1,0 +1,241 @@
+﻿@using FitnessClub.Models
+@{
+    Layout = null;
+}
+@{
+    bool isAdmin = true;
+    bool isMember = true;
+    bool isTrainer = true;
+
+    }
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Fitness Club Management System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Fitness Club Management System" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/assets/images/favicon.ico">
+
+    <link href="~/assets/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/assets/css/sweetalert2.min.css" rel="stylesheet" />
+
+    <link href="~/assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/assets/css/buttons.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/assets/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+    <!-- Bootstrap Css -->
+    <link href="~/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+
+    <!-- Icons Css -->
+    <link href="~/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="~/assets/css/Loader.css" rel="stylesheet" />
+    <link href="~/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+    <script src="~/assets/js/jquery2.0.3.min.js"></script>
+</head>
+<body data-sidebar="dark">
+
+    <div class="loading" align="center" id="divLoader">
+        <br />
+        <img src="~/assets/images/ajax-loader.gif" alt="" width="150" height="150" />
+    </div>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="#" onclick="DashBoardLink();" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="~/assets/images/Logo.png" alt="" height="30">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="~/assets/images/Logo.png" alt="" height="50">
+                            </span>
+                        </a>
+                        <a href="#" onclick="DashBoardLink();" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="~/assets/images/Logo.png" alt="" height="30">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="~/assets/images/Logo.png" alt="" height="50">
+                            </span>
+                        </a>
+                    </div>
+                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn">
+                        <i class="fa fa-fw fa-bars"></i>
+                    </button>
+                </div>
+                <div class="d-flex">
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                            <span class="d-none d-xl-inline-block ml-1" style="color: wheat"></span>
+                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <!-- item-->
+                            <a class="dropdown-item" href="@Url.Action("", "")"><i class="bx bx-user font-size-16 align-middle mr-1"></i> Dashboard</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="@Url.Action("", "")"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header> <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu">
+            <div data-simplebar class="h-100">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->i
+                    <ul class="metismenu list-unstyled" id="side-menu">
+                        <li class="menu-title">Home</li>
+                        @if(isAdmin)
+                        {
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="bx bxs-receipt"></i>
+                                    <span>Fitness Club</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="#" onclick="Members();"> Members</a></li>
+                                    <li><a href="#" onclick="Trainers();"> Trainers</a></li>
+                                    <li><a href="#" onclick="Shifts();"> Shifts</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="bx bxs-receipt"></i>
+                                    <span>Reports</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="#" onclick="Attendance();">Attendance Report</a></li>
+                                    <li><a href="#" onclick="TrainerReport();">Trainer Shifts </a></li>
+                                </ul>
+                            </li>
+                        }
+                        @if(isMember)
+                        {
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="bx bxs-receipt"></i>
+                                    <span>Member</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="#" onclick="RequestShift();">Request Shift </a></li>
+                                </ul>
+                            </li>
+                        }
+                        @if(isTrainer)
+                        {
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="bx bxs-receipt"></i>
+                                    <span>Trainer</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="#" onclick="ViewShifts();">View Shifts</a></li>
+                                </ul>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="#" onclick="RecordAttendance();">Record Attendance</a></li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                    @RenderBody()
+                    <!-- End Page-content -->
+                    <footer class="footer" style="color: #051936; background-color: #E9EEF2">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    @DateTime.Now.Year © Robert
+                                </div>
+                                <div class="col-sm-4 text-center">
+                                    @* <img src="~/assets/images/Logo.png" alt="" height="40" style="vertical-align: middle"> *@
+                                </div>
+                                <div class="col-sm-4">
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END layout-wrapper -->
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+    <!-- JAVASCRIPT -->
+    <script src="~/assets/js/pages/jquery.min.js"></script>
+    <script src="~/assets/js/pages/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/pages/metisMenu.min.js"></script>
+    <script src="~/assets/js/pages/simplebar.min.js"></script>
+    <script src="~/assets/js/pages/waves.min.js"></script>
+
+    <script src="~/assets/select2/js/select2.min.js"></script>
+    <script src="~/assets/js/sweetalert2.min.js"></script>
+
+    <script src="~/assets/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/js/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/assets/js/dataTables.buttons.min.js"></script>
+    <script src="~/assets/js/buttons.bootstrap4.min.js"></script>
+
+    <script src="~/assets/js/jszip.min.js"></script>
+    <script src="~/assets/js/pdfmake.min.js"></script>
+    <script src="~/assets/js/vfs_fonts.js"></script>
+
+    <script src="~/assets/js/buttons.html5.min.js"></script>
+    <script src="~/assets/js/buttons.print.min.js"></script>
+    <script src="~/assets/js/buttons.colVis.min.js"></script>
+
+    <script src="~/assets/js/dataTables.responsive.min.js"></script>
+    <script src="~/assets/js/responsive.bootstrap4.min.js"></script>
+
+    <script src="~/DatePicker/jquery-ui.min.js"></script>
+    <link href="~/DatePicker/jquery-ui.min.css" rel="stylesheet" />
+
+    <script src="~/assets/js/pages/app.js"></script>
+
+    <script src="~/assets/js/ShowProgression.js"></script>
+
+    <script>
+        var Members = function () {
+            ShowProgress();
+            window.location = "/Members/Members";
+        }
+        var Trainers = function () {
+            ShowProgress();
+            window.location = "/Trainers/Trainers";
+        }
+        var Shifts = function () {
+            ShowProgress();
+            window.location = "/Shifts/Shifts";
+        }
+        var RequestShift = function () {
+            ShowProgress();
+            window.location = "/Members/RequestShift";
+        }
+        var RecordAttendance = function () {
+            ShowProgress();
+            window.location = "/Trainer/RecordAttendance";
+        }
+        
+</script>
+@RenderSection("Scripts",required: false)
+</body>
+</html>

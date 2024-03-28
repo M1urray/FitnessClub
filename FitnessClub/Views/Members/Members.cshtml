@@ -1,0 +1,120 @@
+﻿@model IEnumerable<FitnessClub.Models.Member>
+
+@{
+    ViewBag.Title = "Members";
+    Layout = "~/Views/Shared/Sitemaster.cshtml";
+}
+<div>
+    <button class="btn btn-primary " data-toggle="modal" data-target="#myModal">Add Member</button>
+</div>
+<hr/>
+<table class="table">
+    <thead style="background-color:black;color:white">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Shift)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShiftTime)
+        </th>
+        <th>
+
+        </th>
+    </tr>
+    </thead>
+    @if (Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <tdata>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Shift)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShiftTime)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            </tdata>
+        
+        }
+    }
+    else
+    {
+        
+    }
+
+</table>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content bg-white">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Member</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            Name
+                            <div class="col-md-12">
+                                <input class="form-control" type="text" placeholder="name"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            Email
+                            <div class="col-md-12">
+                                <input class="form-control" type="text" placeholder="email"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            Shift
+                            <div class="col-md-12">
+                                <input class="form-control" type="text" placeholder="shift"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            Shift Time
+                            <div class="col-md-12">
+                                <input class="form-control" type="text" placeholder="time"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" align="center">
+                <button class="btn btn-success" >Save</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect " data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
